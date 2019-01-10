@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<title>gradient1</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	
+		<style>
+body
+	{
+	background-color: #000000;	
+	color: white;
+	font-size:50px;
+	}
+	
+#prob{
+color:green;
+text-align:center;
+width: 640px;
+	height: 130px;
+
+
+
+}
+
+#wew{
+	background-image: url('witaj.png');
+	background-repeat: no-repeat;
+	
+	width: 640px;
+	height: 130px;
+		
+}
+
+
+	
+</style>
+	<script>
+var a=30;
+var b;
+var b1;
+var c;
+var c1;
+var r=0.1;
+
+
+function go(){
+
+
+
+//$('#prob').text(hexString);
+gra();
+}
+	
+function gra(){
+	b=a-24;
+	b1=a-38;
+	c=a+24;
+	c1=c+38;
+	
+	
+	
+	$('#prob').css( "background", "linear-gradient(to left,#00ff24 "+b+"%,yellow "+a+"%, #ff0000 "+c+"%,orange "+c1+"%)"  );
+	
+	a=a+r;
+	if (a>80){r=(-0.1)}
+	if (a<1){r=0.1}
+	setTimeout("gra()", 10);
+	}
+	
+angular.module('gradient', [])
+.directive('dyrektywaGradient', ['$timeout',function($timeout) {
+  return {
+	restrict: 'A',
+	link: function (scope, element, attrs) {
+	
+	var funkcja=function (){
+	b=a-24;
+	b1=a-38;
+	c=a+24;
+	c1=c+38;
+	
+	element.css( "background", "linear-gradient(to left,#00ff24 "+b+"%,yellow "+a+"%, #ff0000 "+c+"%,orange "+c1+"%)"  );
+	element.text(a);
+	
+	a=a+r;
+	if (a>80){r=(-0.1)}
+	if (a<1){r=0.1}
+	$timeout(funkcja, 10);
+	};
+	$timeout(funkcja, 10);
+	/*$timeout(function() {
+    
+    //funkcja();
+	}, 10);*/
+	
+	//funkcja();				
+	//setTimeout(funkcja(), 10);
+	}		
+  };
+}]);	
+	
+	
+	
+	
+	
+	</script>
+			
+	
+	
+	
+	
+</head>
+<body onload="go()">
+
+	<div id="prob">
+		<div id="wew"></div>
+	
+	</div> 
+	<div data-ng-app="gradient" >
+		<div id="prob1" dyrektywa-gradient>prob 1
+			<div >qweewq</div>
+		
+		</div> 
+	</div>
+	
+	
+	
+	
+</body>
+</html>
